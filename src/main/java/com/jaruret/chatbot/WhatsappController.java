@@ -18,10 +18,10 @@ public class WhatsappController {
 	
 	@PostMapping("/webhook")
 	public void receiveMessage(@RequestParam Map<String,String> request) {
-//		String from=request.get("From").replace("whatsapp:","");
+		String from=request.get("From").replace("whatsapp:","");
 		String message=request.get("Body").trim().toLowerCase();
 		
-		firebaseLogger.logMessage("+919543395034", message, false);
+		firebaseLogger.logMessage("from", message, false);
 		
 		String reply;
 
@@ -42,7 +42,7 @@ public class WhatsappController {
 
         firebaseLogger.logMessage("bot", reply, true);
         
-        WpService.sendMessage("+919543395034", reply);
+        WpService.sendMessage(from, reply);
 		
 	}
 
